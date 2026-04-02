@@ -4,15 +4,12 @@ const api = axios.create({
   baseURL: 'http://localhost:8000/api',
 });
 
-// Interceptor: Bach l-Token i-douz f ay request automatiquement
-api.interceptors.request.use((config) => {
+localStorage.setItem('token', '20|EdyHRD3a7MOZskQLPs4WOxA52TVgAawXsNCi9M1Zec8555b1');
+
+api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
-}, (error) => {
-  return Promise.reject(error);
 });
 
 export default api;
